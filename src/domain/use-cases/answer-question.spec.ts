@@ -1,22 +1,19 @@
-import { expect, test } from "vitest";
-import { AnswerQuestionUseCase } from "./answer-question";
-import { AnswerRepository } from "../repositories/answers-repository";
-import { Answer } from "../entities/answer";
+import { AnswerQuestionUseCase } from './answer-question';
+import { AnswersRepository } from '../repositories/answers-repository';
+import { Answer } from '../entities/answer';
 
-const fakeAnswersRepository: AnswerRepository = {
-  create: async (answer: Answer) => {
-    return;
-  }
-}
-
-test("Create an Answer", async () => {
+const fakeAnswersRepository: AnswersRepository = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create: async (answer: Answer) => {},
+};
+test('Create an Answer', async () => {
   const answerQuestion = new AnswerQuestionUseCase(fakeAnswersRepository);
 
   const answer = await answerQuestion.execute({
     questionId: '1',
     instructorId: '1',
-    content: 'New Answer'
-  })
+    content: 'New Answer',
+  });
 
   expect(answer.content).toEqual('New Answer');
-})
+});
